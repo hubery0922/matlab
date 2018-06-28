@@ -1,0 +1,40 @@
+clear all
+close all
+
+tic
+
+filename = 'file_path.txt';
+
+fid = fopen(filename);
+tline = fgetl(fid);
+fclose(fid);
+
+expression = '[^\t\r\n ]+(?=:)';
+[match,noMatch] = regexp(tline,expression,'match','split');
+
+match = match';
+noMatch = {noMatch{1,2:end}}';
+
+col_max = length(match);
+for col=1:col_max
+	eval([ match{col} '= [];'  ] );	
+end
+
+
+fid = fopen(filename);
+tline=fgetl(fid);
+while ischar(tline)
+
+	[match,noMatch] = regexp(tline,expression,'match','split');
+	match = match';
+	noMatch = {noMatch{1,2:end}}';
+
+	for col=1:col_max
+		eval([ match{col} '= [' match{col} ' ; ' noMatch{col}(2:end) ' ];' ]);
+	end
+	
+    tline=fgetl(fid);
+end
+fclose(fid);
+
+toc
