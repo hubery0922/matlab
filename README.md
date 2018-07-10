@@ -1,14 +1,15 @@
 # matlab
-matlab data processing
+matlab data processing script
 
-For example, want to read 'file_path.txt'
+For example, if you want to read 'file_path.txt'
 
-file content may as follows:
+which file content may as follows:
 
 var1:123  var2:456
+
 var1:124  var2:457
 ...
 
-Run this script, and then your matlab workspace will occur
+Run this script, and then your matlab workspace will exist such variables as:
 var1 = [123;124];
 var2 = [456;457];
